@@ -1,0 +1,20 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: #055F7A;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #055F7A;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes wave { 0%,100% { transform:scaleY(1); } 50% { transform:scaleY(1.6); } }
