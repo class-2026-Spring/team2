@@ -79,5 +79,83 @@ App.jsx        # 라우팅이 포함된 메인 앱
 
 ## 📄 라이선스
 대학교 프로젝트 — 2026년 봄 학기
+# 🌊 Jeju Medical Guide
 
+A mobile-first medical companion web app for international tourists visiting Jeju Island, South Korea.
+
+## 📱 Live Demo
+[https://jeju-medical.vercel.app](https://jeju-medical.vercel.app)
+
+## 👥 Team
+
+## 🎯 Project Overview
+Jeju Medical Guide helps international tourists navigate medical emergencies and healthcare services in Jeju Island. The app provides multilingual support, real-time hospital availability, and AI-powered health guidance.
+
+## ✨ Features
+- 🔐 **User Authentication** — Secure login/signup with Supabase
+- 🪪 **Medical QR Profile** — Save health info, generate Korean QR code for doctors
+- 🩺 **Symptom Guide** — Step-by-step guidance for common tourist ailments
+- 🗺️ **Find Care Map** — Google Maps with all hospitals, ERs & pharmacies in Jeju
+- 🤖 **MediGuide AI** — Groq-powered health assistant (multilingual)
+- 🚨 **Emergency SOS** — One-tap 119 emergency call
+- 🌐 **4 Languages** — English, 한국어, 中文, 日本語
+
+## 🛠️ Tech Stack
+- **Frontend**: React + Vite
+- **Auth & Database**: Supabase
+- **AI Chatbot**: Groq API (LLaMA 3.3)
+- **Maps**: Google Maps JavaScript API
+- **Deployment**: Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 20+
+- npm
+
+### Installation
+```bash
+git clone https://github.com/class-2026-Spring/team2.git
+cd team2
+npm install
+```
+
+### Environment Variables
+Create a `.env` file in the root:
+
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON=your_supabase_anon_key
+VITE_GROQ_KEY=your_groq_api_key
+VITE_GOOGLE_MAPS_KEY=your_google_maps_key
+
+### Run Development Server
+```bash
+npm run dev
+```
+
+### Build for Production
+```bash
+npm run build
+```
+
+## 📁 Project Structure
+src/
+data/          # Constants, translations, location data
+lib/           # Supabase client
+screens/       # All screen components
+AuthScreen.jsx
+HomeScreen.jsx
+SymptomsScreen.jsx
+MapScreen.jsx
+ChatScreen.jsx
+ProfileScreen.jsx
+App.jsx        # Main app with routing
+
+## ⚠️ Disclaimer
+This app is a university project and is **not intended for clinical use**. 
+Always consult a qualified medical professional for health decisions.
+In emergencies, call **119**.
+
+## 📄 License
+University Project — Spring 2026
 >>>>>>> 09b51b569e93eb2c94f69c607162b984bc287f71
