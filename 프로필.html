@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeju Medical Guide - Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+    button, input, select {
+      font-family: 'Outfit', sans-serif;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <div style="font-family: 'Outfit', sans-serif; max-width: 480px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; display: flex; flexDirection: column; box-sizing: border-box;">
+    
+    <div id="profile-edit-view" style="padding: 16px; display: none;">
+      <div style="font-size: 18px; font-weight: 800; color: #111827; margin-bottom: 4px;">Medical Profile</div>
+      <div style="font-size: 12px; color: #6b7280; margin-bottom: 18px;">Fill in your details to generate a QR code for medical staff in Korea.</div>
+      
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Full Name</label>
+        <input type="text" id="input-name" value="Dahyun Ko" placeholder="e.g. John Doe" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Nationality</label>
+        <input type="text" id="input-nat" value="South Korea" placeholder="e.g. United States" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Language</label>
+        <input type="text" id="input-lang" value="Korean, English" placeholder="e.g. English, Chinese" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Allergies</label>
+        <input type="text" id="input-allergy" value="None" placeholder="e.g. Peanuts, Penicillin" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Chronic Diseases</label>
+        <input type="text" id="input-disease" value="None" placeholder="e.g. Diabetes, Asthma" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Current Medications</label>
+        <input type="text" id="input-meds" value="None" placeholder="e.g. Aspirin" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Emergency Contact</label>
+        <input type="text" id="input-contact" value="+82-10-1234-5678" placeholder="e.g. +1-202-555-0143" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <label style="font-size: 12px; font-weight: 600; color: #111827; display: block; margin-bottom: 4px;">Blood Type</label>
+        <select id="input-blood" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid #e5e7eb; font-size:14px; color:#111827; background:#F8FBFF;">
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+" selected>O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+      </div>
+
+      <button onclick="saveProfile()" style="width: 100%; padding: 14px; border-radius: 14px; border: none; background: linear-gradient(135deg, #0369a1, #0891b2); color: #fff; font-weight: 800; font-size: 15px; cursor: pointer; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(8,145,178,0.3);">Save Profile</button>
+      <button onclick="switchToView()" style="width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #e5e7eb; background: transparent; color: #6b7280; font-weight: 700; font-size: 13px; cursor: pointer;">Cancel</button>
+    </div>
+
+
+    <div id="profile-display-view">
+      <div style="background: linear-gradient(135deg, #0369a1, #0891b2, #06b6d4); height: 108px; position: relative; flex-shrink: 0;">
+        <div id="avatar-initials" style="position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%); width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #0369a1, #0891b2); border: 3.5px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #fff; box-shadow: 0 4px 16px rgba(8,145,178,.35);">DK</div>
+      </div>
+
+      <div style="padding: 44px 16px 0; text-align: center;">
+        <div id="display-name" style="font-size: 21px; font-weight: 800; color: #111827; line-height: 1.1;">Dahyun Ko</div>
+        <div id="display-nat" style="font-size: 13px; color: #6b7280; margin-bottom: 3px; marginTop: 2px;">South Korea</div>
+        <div style="display: inline-flex; align-items: center; gap: 5px; background: #ecfeff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 3px 10px; font-size: 12px; color: #0891b2; font-weight: 600; margin-bottom: 14px;">
+          🌐 <span id="display-lang">Korean, English</span>
+        </div>
+        
+        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 18px;">
+          <button onclick="openQRModal()" style="background: #0891b2; color: #fff; border: none; border-radius: 12px; padding: 10px 18px; font-weight: 700; font-size: 13px; cursor: pointer; flex: 1; max-width: 210px; box-shadow: 0 4px 12px rgba(8,145,178,0.27);">Show Medical QR</button>
+          <button onclick="switchToEdit()" style="background: #ecfeff; color: #0891b2; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap;">Edit</button>
+        </div>
+      </div>
+
+      <div style="padding: 0 16px 24px;">
+        <div style="font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 10px;">Medical Information</div>
+        
+        <div style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(8,145,178,.07); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 12px 14px;">
+          <span style="font-size: 20px; min-width: 24px; margin-top: 1px;">🩸</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 1px;">Blood Type</div>
+            <div id="display-blood" style="font-size: 14px; font-weight: 500; color: #111827; line-height: 1.4;">O+</div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(8,145,178,.07); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 12px 14px;">
+          <span style="font-size: 20px; min-width: 24px; margin-top: 1px;">⚠️</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 1px;">Allergies</div>
+            <div id="display-allergy" style="font-size: 14px; font-weight: 500; color: #111827; line-height: 1.4;">None</div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(8,145,178,.07); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 12px 14px;">
+          <span style="font-size: 20px; min-width: 24px; margin-top: 1px;">🏥</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 1px;">Chronic Diseases</div>
+            <div id="display-disease" style="font-size: 14px; font-weight: 500; color: #111827; line-height: 1.4;">None</div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(8,145,178,.07); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 12px 14px;">
+          <span style="font-size: 20px; min-width: 24px; margin-top: 1px;">💊</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 1px;">Current Medications</div>
+            <div id="display-meds" style="font-size: 14px; font-weight: 500; color: #111827; line-height: 1.4;">None</div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(8,145,178,.07); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 12px 14px;">
+          <span style="font-size: 20px; min-width: 24px; margin-top: 1px;">📞</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 600; color: #6b7280; margin-bottom: 1px;">Emergency Contact</div>
+            <div id="display-contact" style="font-size: 14px; font-weight: 500; color: #111827; line-height: 1.4;">+82-10-1234-5678</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="qr-modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,.62); align-items: center; justify-content: center; zIndex: 999; padding: 20px;" onclick="closeQRModal()">
+      <div style="background: #ffffff; border-radius: 24px; padding: 24px; max-width: 350px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);" onclick="event.stopPropagation()">
+        <div style="font-size: 17px; font-weight: 800; color: #111827; margin-bottom: 4px;">Korean Medical QR</div>
+        <div style="font-size: 12px; color: #6b7280; margin-bottom: 18px; line-height: 1.5;">Show this to Korean medical staff or pharmacists.</div>
+        
+        <div style="background: #ecfeff; border-radius: 16px; padding: 16px; display: inline-block; margin-bottom: 12px; border: 2px solid #bae6fd;">
+          <img id="qr-image" src="" alt="Medical QR Code" style="width: 210px; height: 210px; display: block; border-radius: 8px;">
+        </div>
+        
+        <div style="background: #FFFBEB; border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; text-align: left; font-size: 11px; color: #78350F; line-height: 1.7; border: 1px solid #FDE68A;">
+          <div style="font-weight: 700; margin-bottom: 3px;">📋 의료 정보 (한국어 요약):</div>
+          <div id="qr-korean-text" style="font-family: monospace; white-space: pre-line;"></div>
+        </div>
+        
+        <button onclick="closeQRModal()" style="width: 100%; padding: 12px; border-radius: 12px; border: none; background: #0891b2; color: #fff; font-weight: 700; font-size: 14px; cursor: pointer;">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. 화면 분기 토글 함수
+    function switchToEdit() {
+      document.getElementById('profile-display-view').style.display = 'none';
+      document.getElementById('profile-edit-view').style.display = 'block';
+    }
+    function switchToView() {
+      document.getElementById('profile-display-view').style.display = 'block';
+      document.getElementById('profile-edit-view').style.display = 'none';
+    }
+
+    // 2. 프로필 저장 함수 (입력값 ➔ 대시보드 뷰에 동적 갱신)
+    function saveProfile() {
+      const name = document.getElementById('input-name').value || "—";
+      const nat = document.getElementById('input-nat').value || "—";
+      const lang = document.getElementById('input-lang').value || "—";
+      const blood = document.getElementById('input-blood').value;
+      const allergy = document.getElementById('input-allergy').value || "None";
+      const disease = document.getElementById('input-disease').value || "None";
+      const meds = document.getElementById('input-meds').value || "None";
+      const contact = document.getElementById('input-contact').value || "—";
+
+      // 대시보드 텍스트 업데이트
+      document.getElementById

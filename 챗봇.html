@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeju Medical - MediGuide AI</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --p: #0891b2;
+        --pD: #164e63;
+        --pXL: #ecfeff;
+        --text: #111827;
+        --sub: #6b7280;
+        --border: #e5e7eb;
+        --green: #10b981;
+        --red: #ef4444;
+      }
+      body {
+        margin: 0;
+        background-color: #f3f4f6;
+        font-family: "Outfit", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      /* 채팅창 메인 레이아웃 */
+      .chat-container {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* 헤더 */
+      .header {
+        padding: 14px 16px 10px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+      .header-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .bot-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--p), #06b6d4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      /* 메시지 영역 */
+      #chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 16px;
+        display: flex;
+        flexdirection: column;
+        gap: 10px;
+        background: #f9fafb;
+      }
+      .msg-wrapper {
+        display: flex;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      .msg-user {
+        justify-content: flex-end;
+      }
+      .msg-bot {
+        justify-content: flex-start;
+      }
+
+      .bubble {
+        max-width: 78%;
+        padding: 11px 14px;
+        font-size: 13.5px;
+        line-height: 1.65;
+        box-shadow: 0 2px 12px rgba(8, 145, 178, 0.08);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .msg-user .bubble {
+        background: linear-gradient(135deg, var(--pD), var(--p));
+        color: #fff;
+        border-radius: 18px 18px 4px 18px;
+      }
+      .msg-bot .bubble {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 18px 18px 18px 4px;
+      }
+
+      /* 말줄임표 애니메이션 (입력 중...) */
+      .typing-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--p);
+        animation: wave 1s ease-in-out infinite;
+      }
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* 추천 질문 칩 */
+      .suggestions {
+        padding: 6px 16px 0;
+        display: flex;
+        gap: 7px;
+        overflow-x: auto;
+        flex-shrink: 0;
+      }
+      .chip {
+        flex-shrink: 0;
+        background: var(--pXL);
+        color: var(--pD);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      /* 입력창 */
+      .input-area {
+        padding: 10px 16px 16px;
+        display: flex;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      input {
+        flex: 1;
+        padding: 12px 16px;
+        border-radius: 14px;
+        border: 1.5px solid var(--border);
+        font-size: 13.5px;
+        outline: none;
+        font-family: "Outfit", sans-serif;
+      }
+      input:focus {
+        border-color: var(--p);
+      }
+      .send-btn {
+        background: var(--p);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0 18px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(8, 145, 178, 0.3);
+      }
+      .send-btn:disabled {
+        background: var(--border);
+        cursor: default;
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <!-- 헤더 -->
+      <div class="header">
+        <div class="header-content">
+          <div
+            style="
+              cursor: pointer;
+              font-weight: bold;
+              color: var(--p);
+              margin-right: 5px;
+            "
+          >
+            ←
+          </div>
+          <div class="bot-avatar">🤖</div>
+          <div>
+            <div
+              id="ui-title"
+              style="font-size: 15px; font-weight: 800; color: var(--text)"
+            >
+              MediGuide AI
+            </div>
+            <div
+              id="ui-online"
+              style="font-size: 11px; color: var(--green); font-weight: 600"
+            >
+              ● Online · Health Assistant
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 메시지 목록 -->
+      <div id="chat-messages"></div>
+
+      <!-- 추천 질문 -->
+      <div id="suggestions-box" class="suggestions"></div>
+
+      <!-- 입력부 -->
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="Ask anything..." />
+        <button id="send-btn" class="send-btn" disabled>×</button>
+      </div>
+    </div>
+
+    <script>
+      // --- 설정 및 데이터 ---
+      const GROQ_KEY =
+        "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";
+      const GROQ_MODEL = "llama-3.3-70b-versatile";
+      const currentLang = "ko"; // 테스트 언어 설정 (en, ko, zh, ja)
+
+      const SYSTEM_PROMPT = `You are MediGuide, a friendly AI health assistant for Jeju tourists. Always respond in the SAME language the user writes in. Tell them to call 119 for emergencies.`;
+
+      const UI = {
+        en: {
+          title: "MediGuide AI",
+          online: "● Online",
+          placeholder: "Ask symptoms...",
+          welcome: "Hi 👋 I'm **MediGuide**! How can I help?",
+          suggestions: ["Nearest ER?", "I have a headache"],
+          error: "Connection error.",
+        },
+        ko: {
+          title: "MediGuide AI",
+          online: "● 온라인 · 건강 비서",
+          placeholder: "증상이나 병원을 물어보세요...",
+          welcome:
+            "안녕하세요 👋 제주 의료 비서 **MediGuide**입니다! 무엇을 도와드릴까요?",
+          suggestions: ["가장 가까운 응급실은?", "두통이 있어요", "앱 사용법"],
+          error: "연결에 실패했습니다.",
+        },
+      };
+
+      const ui = UI[currentLang] || UI.en;
+      const chatBox = document.getElementById("chat-messages");
+      const inputEl = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+      const suggBox = document.getElementById("suggestions-box");
+
+      let isTyping = false;
+      let messageHistory = [];
+
+      // --- 초기화 ---
+      function init() {
+        document.getElementById("ui-title").innerText = ui.title;
+        document.getElementById("ui-online").innerText = ui.online;
+        inputEl.placeholder = ui.placeholder;
+        sendBtn.innerText = "➤";
+
+        addMessage("assistant", ui.welcome);
+
+        ui.suggestions.forEach((text) => {
+          const btn = document.createElement("button");
+          btn.className = "chip";
+          btn.innerText = text;
+          btn.onclick = () => handleSend(text);
+          suggBox.appendChild(btn);
+        });
+      }
+
+      // --- 텍스트 렌더러 (**bold** 처리) ---
+      function parseMarkdown(text) {
+        return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+      }
+
+      // --- 메시지 추가 ---
+      function addMessage(role, text) {
+        const wrapper = document.createElement("div");
+        wrapper.className = `msg-wrapper msg-${role}`;
+
+        const content =
+          role === "assistant"
+            ? `<div style="width:30px; height:30px; border-radius:10px; background:linear-gradient(135deg,#0891b2,#06B6D4); display:flex; align-items:center; justify-content:center; font-size:14px; margin-right:7px; align-self:flex-end;">🤖</div>`
+            : "";
+
+        wrapper.innerHTML = `${content}<div class="bubble">${parseMarkdown(text)}</div>`;
+        chatBox.appendChild(wrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        messageHistory.push({ role, content: text });
+      }
+
+      // --- 입력 중 인디케이터 ---
+      function showTyping(show) {
+        if (show) {
+          const div = document.createElement("div");
+          div.id = "typing-indicator";
+          div.style.display = "flex";
+          div.style.gap = "5px";
+          div.style.padding = "10px";
+          div.innerHTML = `<div class="typing-dot"></div><div class="typing-dot" style="animation-delay:0.2s"></div><div class="typing-dot" style="animation-delay:0.4s"></div>`;
+          chatBox.appendChild(div);
+        } else {
+          const el = document.getElementById("typing-indicator");
+          if (el) el.remove();
+        }
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      // --- API 호출 및 전송 로직 ---
+      async function handleSend(text) {
+        const msg = text || inputEl.value.trim();
+        if (!msg || isTyping) return;
+
+        inputEl.value = "";
+        sendBtn.disabled = true;
+        suggBox.style.display = "none"; // 첫 질문 후 추천 삭제
+
+        addMessage("user", msg);
+
+        isTyping = true;
+        showTyping(true);
+
+        try {
+          const response = await fetch(
+            "https://api.groq.com/openai/v1/chat/completions",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${GROQ_KEY}`,
+              },
+              body: JSON.stringify({
+                model: GROQ_MODEL,
+                messages: [
+                  { role: "system", content: SYSTEM_PROMPT },
+                  ...messageHistory.map((m) => ({
+                    role: m.role,
+                    content: m.content,
+                  })),
+                ],
+              }),
+            },
+          );
+
+          const data = await response.json();
+          const reply = data.choices[0].message.content;
+          showTyping(false);
+          addMessage("assistant", reply);
+        } catch (err) {
+          showTyping(false);
+          addMessage("assistant", ui.error);
+          console.error(err);
+        } finally {
+          isTyping = false;
+          sendBtn.disabled = false;
+        }
+      }
+
+      // --- 이벤트 리스너 ---
+      inputEl.oninput = () => {
+        sendBtn.disabled = !inputEl.value.trim();
+      };
+      inputEl.onkeydown = (e) => {
+        if (e.key === "Enter") handleSend();
+      };
+      sendBtn.onclick = () => handleSend();
+
+      init();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeju Medical Guide - Home</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* 기본 초기화 및 애니메이션용 간단한 설정 */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f3f4f6;
+      }
+      button {
+        font-family: "Outfit", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        padding: 16px 16px 8px;
+        font-family: &quot;Outfit&quot;, sans-serif;
+        max-width: 480px;
+        margin: 0 auto;
+        background: #fff;
+        min-height: 100vh;
+        box-sizing: border-box;
+      "
+    >
+      <div
+        style="
+          background: linear-gradient(
+            135deg,
+            #0369a1 0%,
+            #0891b2 55%,
+            #06b6d4 100%
+          );
+          border-radius: 22px;
+          padding: 22px 20px 20px;
+          margin-bottom: 16px;
+          position: relative;
+          overflow: hidden;
+        "
+      >
+        <div
+          style="
+            position: absolute;
+            top: -24px;
+            right: -20px;
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+          "
+        ></div>
+        <div
+          style="
+            position: absolute;
+            bottom: -32px;
+            right: 18px;
+            width: 78px;
+            height: 78px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+          "
+        ></div>
+
+        <div
+          style="
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.78);
+            font-weight: 500;
+            margin-bottom: 3px;
+          "
+        >
+          Welcome to Jeju
+        </div>
+        <div
+          style="
+            font-size: 21px;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+          "
+        >
+          Find Medical Care in Jeju
+        </div>
+        <div
+          style="
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.72);
+            margin-bottom: 8px;
+            font-weight: 500;
+          "
+        >
+          In case of a life-threatening emergency:
+        </div>
+
+        <button
+          onclick="window.open('tel:119')"
+          style="
+            background: #fff;
+            color: #dc2626;
+            border: none;
+            border-radius: 13px;
+            padding: 12px 20px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(220, 38, 38, 0.32);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          📞 Call 119
+        </button>
+      </div>
+
+      <div
+        style="
+          font-size: 14px;
+          font-weight: 700;
+          color: #1f2937;
+          margin-bottom: 10px;
+        "
+      >
+        Quick Services
+      </div>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 11px;
+          margin-bottom: 16px;
+        "
+      >
+        <button
+          onclick="alert('Symptoms 탭으로 이동')"
+          style="
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 15px 14px;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(8, 145, 178, 0.07);
+          "
+        >
+          <div style="font-size: 27px; margin-bottom: 8px">🩺</div>
+          <div
+            style="
+              font-size: 13px;
+              font-weight: 700;
+              color: #1f2937;
+              margin-bottom: 3px;
+              line-height: 1.25;
+            "
+          >
+            Symptoms
+          </div>
+          <div style="font-size: 11px; color: #4b5563; line-height: 1.35">
+            Check your symptoms and find medicine
+          </div>
+        </button>
+
+        <button
+          onclick="alert('Find Care 탭으로 이동')"
+          style="
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 15px 14px;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(8, 145, 178, 0.07);
+          "
+        >
+          <div style="font-size: 27px; margin-bottom: 8px">🏥</div>
+          <div
+            style="
+              font-size: 13px;
+              font-weight: 700;
+              color: #1f2937;
+              margin-bottom: 3px;
+              line-height: 1.25;
+            "
+          >
+            Find Care
+          </div>
+          <div style="font-size: 11px; color: #4b5563; line-height: 1.35">
+            Hospitals and pharmacies map
+          </div>
+        </button>
+
+        <button
+          onclick="alert('AI Chat 탭으로 이동')"
+          style="
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 15px 14px;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(8, 145, 178, 0.07);
+          "
+        >
+          <div style="font-size: 27px; margin-bottom: 8px">🤖</div>
+          <div
+            style="
+              font-size: 13px;
+              font-weight: 700;
+              color: #1f2937;
+              margin-bottom: 3px;
+              line-height: 1.25;
+            "
+          >
+            AI Chatbot
+          </div>
+          <div style="font-size: 11px; color: #4b5563; line-height: 1.35">
+            24/7 Medical AI assistant
+          </div>
+        </button>
+
+        <button
+          onclick="alert('Profile 탭으로 이동')"
+          style="
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 15px 14px;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(8, 145, 178, 0.07);
+          "
+        >
+          <div style="font-size: 27px; margin-bottom: 8px">📋</div>
+          <div
+            style="
+              font-size: 13px;
+              font-weight: 700;
+              color: #1f2937;
+              margin-bottom: 3px;
+              line-height: 1.25;
+            "
+          >
+            Medical QR
+          </div>
+          <div style="font-size: 11px; color: #4b5563; line-height: 1.35">
+            Generate QR for Korean doctors
+          </div>
+        </button>
+      </div>
+
+      <div
+        style="
+          background: #f0fdfa;
+          border-radius: 13px;
+          padding: 11px 14px;
+          border: 1px solid #e5e7eb;
+          font-size: 12px;
+          color: #1f2937;
+          line-height: 1.55;
+        "
+      >
+        💡 <strong>Tip:</strong> Most pharmacies in Jeju close after 8 PM. Use
+        'Find Care' to check real-time open locations.
+      </div>
+
+      <div
+        style="
+          text-align: center;
+          font-size: 10.5px;
+          color: #4b5563;
+          margin-top: 14px;
+          padding: 0 4px;
+          line-height: 1.5;
+        "
+      >
+        🎓 University project · Not for clinical use · In emergencies, call 119
+      </div>
+    </div>
+  </body>
+</html>

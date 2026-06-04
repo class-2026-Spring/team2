@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeju Medical Guide - Map & Care</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+    button, a {
+      font-family: 'Outfit', sans-serif;
+      box-sizing: border-box;
+    }
+    /* 가로 스크롤바 숨기기 (필터 칩 영역용) */
+    .scroll-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div style="padding: 16px; font-family: 'Outfit', sans-serif; max-width: 480px; margin: 0 auto; background: #fff; min-height: 100vh; box-sizing: border-box;">
+    
+    <div style="font-size: 18px; font-weight: 800; color: #111827; margin-bottom: 2px;">Find Medical Care</div>
+    <div style="font-size: 12.5px; color: #6b7280; margin-bottom: 14px;">Nearby hospitals and pharmacies in Jeju.</div>
+    
+    <div class="scroll-hide" style="display: flex; gap: 7px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 3px;">
+      <button id="btn-all" onclick="filterLocations('All')" style="flex-shrink: 0; background: #0891b2; color: #fff; border: 1.5px solid #0891b2; border-radius: 20px; padding: 7px 15px; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap;">All</button>
+      <button id="btn-hospitals" onclick="filterLocations('Hospitals')" style="flex-shrink: 0; background: #ffffff; color: #6b7280; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 7px 15px; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap;">Hospitals</button>
+      <button id="btn-pharmacies" onclick="filterLocations('Pharmacies')" style="flex-shrink: 0; background: #ffffff; color: #6b7280; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 7px 15px; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap;">Pharmacies</button>
+      <button id="btn-er" onclick="filterLocations('ER Only')" style="flex-shrink: 0; background: #ffffff; color: #6b7280; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 7px 15px; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap;">ER Only</button>
+    </div>
+
+    <div id="no-results" style="display: none; text-align: center; color: #6b7280; padding: 40px; font-size: 14px;">
+      No results found.
+    </div>
+
+    <div id="location-list">
+      
+      <div class="loc-item" data-type="hospital" data-er="true" style="background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 16px; margin-bottom: 11px; overflow: hidden; box-shadow: 0 2px 8px rgba(8,145,178,.05);">
+        <div style="padding: 14px 15px; cursor: pointer;" onclick="toggleExpand('loc-1')">
+          <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px;">
+            <div style="flex: 1;">
+              <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px;">
+                <span style="background: #ecfeff; color: #0891b2; border-radius: 6px; padding: 2px 8px; font-size: 10.5px; font-weight: 700; text-transform: uppercase;">🏥 Hospital</span>
+                <span style="background: #fef2f2; color: #dc2626; border-radius: 6px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">Emergency</span>
+                <span style="background: #f0fdfa; color: #10b981; border-radius: 6px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">● Open</span>
+              </div>
+              <div style="font-size: 15px; font-weight: 700; color: #111827; line-height: 1.2;">Jeju National University Hospital</div>
+              <div style="font-size: 12px; color: #6b7280;">제주대학교병원</div>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <div style="font-size: 12px; font-weight: 600; color: #6b7280;">2.4 km</div>
+              <div id="arrow-loc-1" style="font-size: 20px; color: #0891b2; margin-top: 4px;">▼</div>
+            </div>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 6px; background: #fef3c7; border-radius: 8px; padding: 4px 11px; border: 1px solid rgba(217,119,6,0.2);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #d97706; display: inline-block;"></span>
+            <span style="font-size: 11.5px; font-weight: 700; color: #d97706;">Moderate Waiting (보통)</span>
+          </div>
+        </div>
+        <div id="details-loc-1" style="display: none; padding: 0 15px 14px; border-top: 1px solid #e5e7eb;">
+          <div style="padding-top: 10px; display: grid; gap: 7px;">
+            <div style="display: flex; gap: 8px; font-size: 13px;">
+              <span style="color: #6b7280; font-weight: 600; min-width: 72px; flex-shrink: 0;">Hours:</span>
+              <span style="color: #111827;">24/7 (Emergency Room)</span>
+            </div>
+            <div style="display: flex; gap: 8px; font-size: 13px;">
+              <span style="color: #6b7280; font-weight: 600; min-width: 72px; flex-shrink: 0;">Phone:</span>
+              <span style="color: #111827;">064-717-1114</span>
+            </div>
+            <div style="display: flex; gap: 8px; font-size: 13px;">
+              <span style="color: #6b7280; font-weight: 600; min-width: 72px; flex-shrink: 0;">Distance:</span>
+              <span style="color: #111827;">2.4 km from city center</span>
+            </div>
+            <div style="display: flex; gap: 8px; font-size: 13px; flex-wrap: wrap; align-items: flex-start;">
+              <span style="color: #6b7280; font-weight: 600; min-width: 72px; flex-shrink: 0;">Languages:</span>
+              <div

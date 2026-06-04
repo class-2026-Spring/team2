@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeju Medical - Authentication</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* 기본 컬러 스키마 변수 정의 */
+      --p: #0891b2;
+      --pD: #164e63;
+      --pXL: #ecfeff;
+      --sub: #6b7280;
+      --text: #111827;
+      --border: #e5e7eb;
+      --red: #ef4444;
+      --green: #10b981;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+    button, input {
+      font-family: 'Outfit', sans-serif;
+      box-sizing: border-box;
+      transition: all 0.18s ease;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--p) !important;
+      background-color: #fff !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div style="min-height: 100vh; background: linear-gradient(135deg, var(--pD) 0%, var(--p) 60%, #06B6D4 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box;">
+    
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div style="font-size: 52px; margin-bottom: 8px;">🌊</div>
+      <div style="font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.3px;">Jeju Medical</div>
+      <div style="font-size: 13px; color: rgba(255,255,255,.7); margin-top: 4px;">
+        Medical companion for international visitors
+      </div>
+    </div>
+
+    <div style="width: 100%; max-width: 380px; background: rgba(255,255,255,.95); backdrop-filter: blur(24px); border-radius: 24px; padding: 28px; box-shadow: 0 24px 60px rgba(0,0,0,.2); box-sizing: border-box;">
+      
+      <div style="display: flex; background: var(--pXL); border-radius: 14px; padding: 4px; margin-bottom: 24px;">
+        <button id="tab-login" onclick="setAuthMode('login')" style="flex: 1; padding: 10px; border-radius: 11px; border: none; background: var(--p); color: #fff; font-weight: 700; font-size: 14px; cursor: pointer;">
+          Log In
+        </button>
+        <button id="tab-signup" onclick="setAuthMode('signup')" style="flex: 1; padding: 10px; border-radius: 11px; border: none; background: transparent; color: var(--sub); font-weight: 700; font-size: 14px; cursor: pointer;">
+          Sign Up
+        </button>
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--sub); display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px;">
+          Email
+        </label>
+        <input type="email" id="input-email" placeholder="your@email.com" onkeydown="if(event.key === 'Enter') handleAuthSubmit()" style="width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--border); font-size: 14px; color: var(--text); background: #F8FBFF;">
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--sub); display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px;">
+          Password
+        </label>
+        <input type="password" id="input-password" placeholder="min. 6 characters" onkeydown="if(event.key === 'Enter') handleAuthSubmit()" style="width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--border); font-size: 14px; color: var(--text); background: #F8FBFF;">
+      </div>
+
+      <div id="error-box" style="display: none; background: #fef2f2; color: #ef4444; border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; border: 1px solid rgba(239,68,68,0.2);"></div>
+      <div id="success-box" style="display: none; background: #f0fdf4; color: #15803d; border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; border: 1px solid rgba(16,185,129,0.2);"></div>
+
+      <button id="submit-btn" onclick="handleAuthSubmit()" style="width: 100%; padding: 14px; border-radius: 14px; border: none; background: linear-gradient(135deg, var(--pD), var(--p)); color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 6px 20px rgba(8,145,178,0.33);">
+        Log In
+      </button>
+    </div>
+
+    <div style="font-size: 11px; color
