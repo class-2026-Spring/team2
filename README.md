@@ -158,4 +158,3 @@ In emergencies, call **119**.
 
 ## 📄 License
 University Project — Spring 2026
->>>>>>> 09b51b569e93eb2c94f69c607162b984bc287f71
