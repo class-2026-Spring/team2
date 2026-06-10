@@ -1,5 +1,18 @@
 import { C } from "../data/constants";
 
+import homeIcon     from "../assets/icons/house.png";
+import profileIcon  from "../assets/icons/profile.png";
+import symptomsIcon from "../assets/icons/diagnosis.png";
+import findcareIcon from "../assets/icons/find.png";
+import aiIcon       from "../assets/icons/assistant.png";
+
+const CARD_ICONS = {
+  profile:  profileIcon,
+  symptoms: symptomsIcon,
+  map:      findcareIcon,
+  chat:     aiIcon,
+};
+
 export default function HomeScreen({ t, fs, setTab }) {
   const s = t.home;
 
@@ -25,16 +38,17 @@ export default function HomeScreen({ t, fs, setTab }) {
       <div style={{ fontSize:fs*14, fontWeight:700, color:C.text, marginBottom:10 }}>{s.quick}</div>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11, marginBottom:16 }}>
         {s.cards.map((c, i) => (
-          <button
-            key={i}
-            onClick={() => setTab(c.tab)}
-            style={{ background:C.card, border:`1.5px solid ${C.border}`, borderRadius:16, padding:"15px 14px", cursor:"pointer", textAlign:"left", boxShadow:"0 2px 10px rgba(8,145,178,.07)" }}
-          >
-            <div style={{ fontSize:27, marginBottom:8 }}>{c.icon}</div>
-            <div style={{ fontSize:fs*13, fontWeight:700, color:C.text, marginBottom:3, lineHeight:1.25 }}>{c.t}</div>
-            <div style={{ fontSize:fs*11, color:C.sub, lineHeight:1.35 }}>{c.d}</div>
-          </button>
-        ))}
+          <button key={i} onClick={() => setTab(c.tab)} style={{ background:C.card, border:`1.5px solid ${C.border}`, borderRadius:16, padding:"15px 14px", cursor:"pointer", textAlign:"left", boxShadow:"0 2px 10px rgba(8,145,178,.07)" }}>
+      {/* Replace emoji with PNG */}
+      <div style={{ width:40, height:40, borderRadius:12, background:C.pXL, display:"flex", alignItems:"center", justifyContent:"center", marginBottom:8 }}>
+        <img src={CARD_ICONS[c.tab]} width={26} height={26} style={{ objectFit:"contain" }}/>
+        </div>
+        <div style={{ fontSize:fs*13, fontWeight:700, color:C.text, marginBottom:3, lineHeight:1.25 }}>{c.t}</div>
+        <div style={{ fontSize:fs*11, color:C.sub, lineHeight:1.35 }}>{c.d}</div>
+        </button>
+      ))}
+        
+        
       </div>
 
       

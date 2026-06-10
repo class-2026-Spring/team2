@@ -1,3 +1,20 @@
+import headacheIcon from "../assets/icons/headache.png";
+import stomachIcon  from "../assets/icons/stomachache.png";
+import feverIcon    from "../assets/icons/sick.png";
+import coldIcon     from "../assets/icons/sneezing.png";
+import foodIcon     from "../assets/icons/apple.png";
+import woundIcon     from "../assets/icons/wound-care.png";
+
+const SYMPTOM_ICONS = {
+  headache: headacheIcon,
+  stomach:  stomachIcon,
+  fever:    feverIcon,
+  cold:     coldIcon,
+  food:     foodIcon,
+  trauma:   woundIcon, 
+};
+
+
 // ── LOCATIONS ─────────────────────────────────────────────────────────────────
 
 export const LOCS = [

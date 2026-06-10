@@ -2,6 +2,9 @@ import { useState } from "react";
 import { sb } from "../lib/supabase";
 import { C } from "../data/constants";
 
+
+import logoIcon from "../assets/icons/wave.png";
+
 export default function AuthScreen({ onAuth }) {
   const [mode,     setMode]     = useState("login"); // "login" | "signup"
   const [email,    setEmail]    = useState("");
@@ -36,13 +39,12 @@ export default function AuthScreen({ onAuth }) {
       padding:24, fontFamily:"'Outfit',sans-serif",
     }}>
       {/* Logo */}
-      <div style={{ textAlign:"center", marginBottom:32 }}>
-        <div style={{ fontSize:52, marginBottom:8 }}>🌊</div>
-        <div style={{ fontSize:26, fontWeight:800, color:"#fff", letterSpacing:-.3 }}>Jeju Medical</div>
-        <div style={{ fontSize:13, color:"rgba(255,255,255,.7)", marginTop:4 }}>
-          Medical companion for international visitors
-        </div>
-      </div>
+      <img src={logoIcon}
+      alt="Jeju Medical"
+      width={52}
+      height={52}
+      style={{ marginBottom:8 }}
+      />
 
       {/* Card */}
       <div style={{
